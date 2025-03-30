@@ -22,6 +22,22 @@ class ProdutorPrismaRepository implements ProdutorRepository {
       },
     });
   }
+
+  async update(id: string, data: Partial<Produtor>): Promise<void> {
+    await this.prismaService.produtor.update({
+      where: { id },
+      data: {
+        nomeProdutor: data.nomeProdutor,
+        nomeFazenda: data.nomeFazenda,
+        cidade: data.cidade,
+        estado: data.estado,
+        areaTotalHectares: data.areaTotalHectares,
+        areaAgricultavel: data.areaAgricultavel,
+        areaDeVegetacao: data.areaDeVegetacao,
+        culturasPlantadas: data.culturasPlantadas,
+      },
+    });
+  }
 }
 
 export { ProdutorPrismaRepository };
