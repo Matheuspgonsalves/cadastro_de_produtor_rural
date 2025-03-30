@@ -9,7 +9,7 @@ datasource db {
 
 model Produtor {
   id                 String   @id @default(uuid())
-  cpfOuCnpj          String
+  cpfOuCnpj          String   @unique
   nomeProdutor       String
   nomeFazenda        String
   cidade             String
