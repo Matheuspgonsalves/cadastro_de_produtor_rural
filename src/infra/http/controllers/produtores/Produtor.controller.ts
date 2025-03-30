@@ -22,6 +22,7 @@ export class ProdutorController {
     async update(
         @Param('cpfOuCnpj') cpfOuCnpj: string, 
         @Body() body: AtualizarProdutorDTO) {
+        console.log('CPF recebido no controller:', cpfOuCnpj);
         return this.atualizarProdutorUseCase.execute(cpfOuCnpj, body)
     }
 
