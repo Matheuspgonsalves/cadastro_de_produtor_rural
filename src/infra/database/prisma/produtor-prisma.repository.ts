@@ -24,48 +24,45 @@ class ProdutorPrismaRepository implements ProdutorRepository {
     });
   }
 
-  async update(cpfOuCnpj: string, produtor:AtualizarProdutorDTO): Promise<void> {
-      const produtorExistente = await this.prismaService.produtor.findFirst({
-        where: { cpfOuCnpj },
-      });
-    
-      if (!produtorExistente) {
-        throw new HttpException('Produtor não encontrado', HttpStatus.NOT_FOUND);
-      }
-  
-      const checarId = await this.prismaService.produtor.findUnique({
-        where: {
-          id: produtorExistente.id,
-        },
-      });
-    
-      if (!checarId) {
-        throw new HttpException('Produtor desapareceu do banco antes do update', HttpStatus.INTERNAL_SERVER_ERROR);
-      }
-  
-      const dataAtualizada = {
-        nomeProdutor: produtor.nomeProdutor,
-        nomeFazenda: produtor.nomeFazenda,
-        cidade: produtor.cidade,
-        estado: produtor.estado,
-        areaTotalHectares: produtor.areaTotalHectares,
-        areaAgricultavel: produtor.areaAgricultavel,
-        areaDeVegetacao: produtor.areaDeVegetacao,
-        culturasPlantadas: produtor.culturasPlantadas,
-      };
-  
-      Object.keys(dataAtualizada).forEach((key) => {
-        if (dataAtualizada[key] === undefined) {
-          delete dataAtualizada[key];
-        }
-      });
-  
-      await this.prismaService.produtor.update({
-        where: { id: produtorExistente.id },
-        data: dataAtualizada,
-      });
+  async update(cpfOuCnpj: string, produtor: AtualizarProdutorDTO): Promise<void> {
+    const produtorExistente = await this.prismaService.produtor.findFirst({
+      where: { cpfOuCnpj },
+    });
+
+    if (!produtorExistente) {
+      throw new HttpException('Produtor não encontrado', HttpStatus.NOT_FOUND);
     }
-  
+
+    const checarId = await this.prismaService.produtor.findUnique({
+      where: { id: produtorExistente.id },
+    });
+
+    if (!checarId) {
+      throw new HttpException('Produtor desapareceu do banco antes do update', HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
+    const dataAtualizada = {
+      nomeProdutor: produtor.nomeProdutor,
+      nomeFazenda: produtor.nomeFazenda,
+      cidade: produtor.cidade,
+      estado: produtor.estado,
+      areaTotalHectares: produtor.areaTotalHectares,
+      areaAgricultavel: produtor.areaAgricultavel,
+      areaDeVegetacao: produtor.areaDeVegetacao,
+      culturasPlantadas: produtor.culturasPlantadas,
+    };
+
+    Object.keys(dataAtualizada).forEach((key) => {
+      if (dataAtualizada[key] === undefined) {
+        delete dataAtualizada[key];
+      }
+    });
+
+    await this.prismaService.produtor.update({
+      where: { id: produtorExistente.id },
+      data: dataAtualizada,
+    });
+  }
 }
 
 export { ProdutorPrismaRepository };

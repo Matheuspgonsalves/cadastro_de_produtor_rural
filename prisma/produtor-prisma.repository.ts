@@ -9,15 +9,13 @@ class ProdutorPrismaRepository implements ProdutorRepository {
   constructor(private readonly prismaService: PrismaService) {}
 
   async save(produtor: Produtor): Promise<void> {
-
     const produtorExistente = await this.prismaService.produtor.findFirst({
       where: { cpfOuCnpj: produtor.cpfOuCnpj },
     });
-    
+
     if (produtorExistente) {
       throw new Error('Produtor com este CPF/CNPJ já existe');
     }
-    
 
     await this.prismaService.produtor.create({
       data: {
@@ -34,33 +32,27 @@ class ProdutorPrismaRepository implements ProdutorRepository {
     });
   }
 
-  async update(cpfOuCnpj: string, produtor:AtualizarProdutorDTO): Promise<void> {
-    
+  async update(cpfOuCnpj: string, produtor: AtualizarProdutorDTO): Promise<void> {
     console.log('>>> ENTROU NO MÉTODO CERTO');
-
     console.log('[UPDATE] Início do update para CPF/CNPJ:', cpfOuCnpj);
 
     const produtorExistente = await this.prismaService.produtor.findFirst({
       where: { cpfOuCnpj },
     });
-  
+
     if (!produtorExistente) {
       console.error('[UPDATE] Produtor não encontrado com CPF/CNPJ:', cpfOuCnpj);
       throw new HttpException('Produtor não encontrado', HttpStatus.NOT_FOUND);
     }
 
     const checarId = await this.prismaService.produtor.findUnique({
-      where: {
-        id: produtorExistente.id,
-      },
+      where: { id: produtorExistente.id },
     });
-  
+
     if (!checarId) {
       console.error('[UPDATE] ID não encontrado na base de dados antes do update:', produtorExistente.id);
       throw new HttpException('Produtor desapareceu do banco antes do update', HttpStatus.INTERNAL_SERVER_ERROR);
     }
-
-    console.log('[UPDATE] Produtor encontrado:', produtorExistente);
 
     const dataAtualizada = {
       nomeProdutor: produtor.nomeProdutor,

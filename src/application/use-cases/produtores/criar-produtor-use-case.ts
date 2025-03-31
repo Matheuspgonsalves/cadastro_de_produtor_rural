@@ -1,14 +1,15 @@
+import { Inject } from '@nestjs/common';
 import { CriarProdutorDTO } from 'src/application/dtos/produtores/criar-produtor-dto';
 import { Cultura } from 'src/core/produtores/entities/cultura.enum';
 import { Produtor } from 'src/core/produtores/entities/Produtor.entity';
-import { ProdutorRepository } from 'src/core/produtores/repositories/produtor.repository';
+import { PRODUTOR_REPOSITORY, ProdutorRepository } from 'src/core/produtores/repositories/produtor.repository';
 import { documentIsValid } from 'src/core/produtores/validators/documento.validator';
 
 export class CriarProdutorUseCase {
-    produtorRepository: ProdutorRepository;
-
-    constructor(produtorRepository: ProdutorRepository){
-        this.produtorRepository = produtorRepository;
+    constructor(
+        @Inject(PRODUTOR_REPOSITORY)
+        private readonly produtorRepository: ProdutorRepository
+    ){
     }
 
     public execute(data: CriarProdutorDTO) {

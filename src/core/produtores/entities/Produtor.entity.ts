@@ -1,15 +1,15 @@
 import { Cultura } from "./cultura.enum";
 
 export class Produtor {
-    private cpfOuCnpj: string;
-    private nomeProdutor: string;
-    private nomeFazenda: string;
-    private cidade: string;
-    private estado: string
-    private areaTotalHectares: number
-    private areaAgricultavel: number
-    private areaDeVegetacao: number
-    private culturasPlantadas: Cultura[]
+    readonly cpfOuCnpj: string;
+    readonly nomeProdutor: string;
+    readonly nomeFazenda: string;
+    readonly cidade: string;
+    readonly estado: string
+    readonly areaTotalHectares: number
+    readonly areaAgricultavel: number
+    readonly areaDeVegetacao: number
+    readonly culturasPlantadas: Cultura[]
 
     constructor(
         cpfOuCnpj: string, 
