@@ -92,11 +92,32 @@ class ProdutorPrismaRepository implements ProdutorRepository {
         produtor.areaTotalHectares,
         produtor.areaAgricultavel,
         produtor.areaDeVegetacao,
-        produtor.culturasPlantadas as Cultura[] // se precisar forçar
+        produtor.culturasPlantadas as Cultura[] 
       )
     );
   }
   
+  async findByCpfOuCnpj(cpfOuCnpj: string): Promise<Produtor | null> {
+    const produtor = await this.prismaService.produtor.findFirst({
+      where: { cpfOuCnpj },
+    });
+  
+    if (!produtor) {
+      return null;
+    }
+  
+    return new Produtor(
+      produtor.cpfOuCnpj,
+      produtor.nomeProdutor,
+      produtor.nomeFazenda,
+      produtor.cidade,
+      produtor.estado,
+      produtor.areaTotalHectares,
+      produtor.areaAgricultavel,
+      produtor.areaDeVegetacao,
+      produtor.culturasPlantadas as Cultura[]
+    );
+  }
   
 }
 
