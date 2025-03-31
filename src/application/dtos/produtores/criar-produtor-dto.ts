@@ -1,13 +1,31 @@
+import { ApiProperty } from "@nestjs/swagger";
 import { Cultura } from "src/core/produtores/entities/cultura.enum";
 
 export class CriarProdutorDTO {
+    @ApiProperty()
     cpfOuCnpj: string;
+
+    @ApiProperty()
     nomeProdutor: string;
-    nomeFazenda: string;
+
+    @ApiProperty()
+    nomeFazenda: string;    
+
+    @ApiProperty()
     cidade: string;
-    estado: string
-    areaTotalHectares: number
-    areaAgricultavel: number
-    areaDeVegetacao: number
-    culturasPlantadas: Cultura[]
+
+    @ApiProperty()
+    estado: string;
+
+    @ApiProperty()
+    areaTotalHectares: number;
+
+    @ApiProperty()
+    areaAgricultavel: number;
+
+    @ApiProperty()
+    areaDeVegetacao: number;
+
+    @ApiProperty({isArray: true, enum: Cultura})
+    culturasPlantadas: Cultura[];
 }
