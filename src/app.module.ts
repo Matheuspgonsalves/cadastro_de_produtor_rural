@@ -7,6 +7,7 @@ import { PRODUTOR_REPOSITORY, ProdutorRepository } from './core/produtores/repos
 import { AtualizarProdutorUseCase } from './application/use-cases/produtores/atualizar-produtor-use-case';
 import { DeletarProdutorUseCase } from './application/use-cases/produtores/deletar-produtor-use-case';
 import { ListarProdutoresUseCase } from './application/use-cases/produtores/listar-produtores-use-case';
+import { BuscarProdutorUseCase } from './application/use-cases/produtores/buscar-produtor-use-case';
 
 @Module({
   imports: [PrismaModule], 
@@ -16,6 +17,7 @@ import { ListarProdutoresUseCase } from './application/use-cases/produtores/list
     AtualizarProdutorUseCase,
     DeletarProdutorUseCase,
     ListarProdutoresUseCase,
+    BuscarProdutorUseCase,
     {
       provide: PRODUTOR_REPOSITORY, 
       useClass: ProdutorPrismaRepository, 
