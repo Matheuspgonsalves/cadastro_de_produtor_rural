@@ -128,5 +128,5 @@ Lá você verá todos os endpoints disponíveis com exemplos de requisição e r
 
 ## 📎 Autor
 
-Feito com 💻 por [Matheus Gonsalves](https://github.com/Matheusgonsalves)
+Feito com por [Matheus Gonsalves](https://github.com/Matheusgonsalves)
 
