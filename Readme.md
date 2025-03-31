@@ -123,6 +123,8 @@ Lá você verá todos os endpoints disponíveis com exemplos de requisição e r
 | GET    | `/produtores/:cpfOuCnpj` | Buscar um produtor específico    |
 | PUT    | `/produtores/:cpfOuCnpj` | Atualizar dados de um produtor   |
 | DELETE | `/produtores/:cpfOuCnpj` | Remover um produtor              |
+| GET    | `/produtores/indicadores` | Exibe total de fazendas, hectares e culturas por estado |
+
 
 ---
 
