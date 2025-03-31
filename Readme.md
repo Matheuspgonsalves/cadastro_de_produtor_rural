@@ -50,9 +50,83 @@ Tecnologias obrigatórias:
 - TypeScript
 - PostgreSQL
 
-## ✅ Diferenciais Desejáveis
+## Diferenciais Desejáveis
 
-- Uso do framework **NestJS**
-- Aplicação de boas práticas como **SOLID**, **Clean Code**, **DDD**, **Arquitetura Hexagonal**
-- Cobertura de **testes**
+- Uso do framework **NestJS** ✅
+- Aplicação de boas práticas como **SOLID**, **Clean Code**, **DDD**, **Arquitetura Hexagonal** ✅
+- Cobertura de **testes** 
 - Entrega com `docker-compose.yml` já configurando banco e servidor
+
+---
+
+## Intruções de utilização
+
+### 1. Clone o repositório
+
+```bash
+git clone https://github.com/seu-usuario/seu-repositorio.git
+cd seu-repositorio
+```
+
+### 2. Instale as dependências
+
+```bash
+npm install
+```
+
+### 3. Configure o banco de dados
+
+Crie um arquivo `.env` com a seguinte variável:
+
+```env
+DATABASE_URL="postgresql://usuario:senha@localhost:5432/nome_do_banco"
+```
+
+> ⚠️ Substitua `usuario`, `senha` e `nome_do_banco` conforme seu ambiente local.
+
+### 4. Gere as migrations e aplique no banco
+
+```bash
+npx prisma migrate dev --name init
+```
+
+> Isso criará as tabelas no seu banco de dados.
+
+### 5. Inicie a aplicação
+
+```bash
+npm run start:dev
+```
+
+O servidor será iniciado em:
+
+📍 `http://localhost:3000`
+
+---
+
+## 📘 Documentação da API — Swagger
+
+Após rodar o projeto, acesse:
+
+🔗 [`http://localhost:3000/api`](http://localhost:3000/api)
+
+Lá você verá todos os endpoints disponíveis com exemplos de requisição e resposta.
+
+---
+
+## 📬 Endpoints da API
+
+| Método | Endpoint                 | Descrição                        |
+|--------|--------------------------|----------------------------------|
+| POST   | `/produtores`            | Cadastrar novo produtor          |
+| GET    | `/produtores`            | Listar todos os produtores       |
+| GET    | `/produtores/:cpfOuCnpj` | Buscar um produtor específico    |
+| PUT    | `/produtores/:cpfOuCnpj` | Atualizar dados de um produtor   |
+| DELETE | `/produtores/:cpfOuCnpj` | Remover um produtor              |
+
+---
+
+## 📎 Autor
+
+Feito com 💻 por [Matheus Gonsalves](https://github.com/Matheusgonsalves)
+
