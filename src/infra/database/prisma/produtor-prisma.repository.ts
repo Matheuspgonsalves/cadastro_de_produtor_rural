@@ -4,6 +4,7 @@ import { PrismaService } from "./prisma.service";
 import { Produtor } from "src/core/produtores/entities/Produtor.entity";
 import { AtualizarProdutorDTO } from "src/application/dtos/produtores/atualizar-produtor-dto";
 import { Cultura } from "src/core/produtores/entities/cultura.enum";
+import { IndicadoresDTO } from "src/application/dtos/produtores/indicadores-dto";
 
 @Injectable()
 class ProdutorPrismaRepository implements ProdutorRepository {
@@ -117,6 +118,34 @@ class ProdutorPrismaRepository implements ProdutorRepository {
       produtor.areaDeVegetacao,
       produtor.culturasPlantadas as Cultura[]
     );
+  }
+
+  async gerarIndicadores(): Promise<IndicadoresDTO> {
+    const produtores = await this.prismaService.produtor.findMany();
+  
+    const totalFazendas = produtores.length;
+    const totalHectares = produtores.reduce((soma, p) => soma + p.areaTotalHectares, 0);
+  
+    const culturasPorEstado: Record<string, Record<string, number>> = {};
+  
+    for (const produtor of produtores) {
+      if (!culturasPorEstado[produtor.estado]) {
+        culturasPorEstado[produtor.estado] = {};
+      }
+  
+      for (const cultura of produtor.culturasPlantadas) {
+        if (!culturasPorEstado[produtor.estado][cultura]) {
+          culturasPorEstado[produtor.estado][cultura] = 0;
+        }
+        culturasPorEstado[produtor.estado][cultura]++;
+      }
+    }
+  
+    return {
+      totalFazendas,
+      totalHectares,
+      culturasPorEstado
+    };
   }
   
 }

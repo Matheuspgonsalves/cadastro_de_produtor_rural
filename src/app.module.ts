@@ -8,6 +8,7 @@ import { AtualizarProdutorUseCase } from './application/use-cases/produtores/atu
 import { DeletarProdutorUseCase } from './application/use-cases/produtores/deletar-produtor-use-case';
 import { ListarProdutoresUseCase } from './application/use-cases/produtores/listar-produtores-use-case';
 import { BuscarProdutorUseCase } from './application/use-cases/produtores/buscar-produtor-use-case';
+import { GerarIndicadoresUseCase } from './application/use-cases/produtores/gerar-indicadores-use-case';
 
 @Module({
   imports: [PrismaModule], 
@@ -18,6 +19,7 @@ import { BuscarProdutorUseCase } from './application/use-cases/produtores/buscar
     DeletarProdutorUseCase,
     ListarProdutoresUseCase,
     BuscarProdutorUseCase,
+    GerarIndicadoresUseCase,
     {
       provide: PRODUTOR_REPOSITORY, 
       useClass: ProdutorPrismaRepository, 
