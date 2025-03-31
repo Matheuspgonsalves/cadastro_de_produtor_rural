@@ -3,6 +3,7 @@ import { ProdutorRepository } from "src/core/produtores/repositories/produtor.re
 import { PrismaService } from "./prisma.service";
 import { Produtor } from "src/core/produtores/entities/Produtor.entity";
 import { AtualizarProdutorDTO } from "src/application/dtos/produtores/atualizar-produtor-dto";
+import { Cultura } from "src/core/produtores/entities/cultura.enum";
 
 @Injectable()
 class ProdutorPrismaRepository implements ProdutorRepository {
@@ -77,6 +78,25 @@ class ProdutorPrismaRepository implements ProdutorRepository {
       where: { id: produtor.id },
     });
   }
+  
+  async findAll(): Promise<Produtor[]> {
+    const produtoresDB = await this.prismaService.produtor.findMany();
+  
+    return produtoresDB.map((produtor) => 
+      new Produtor(
+        produtor.cpfOuCnpj,
+        produtor.nomeProdutor,
+        produtor.nomeFazenda,
+        produtor.cidade,
+        produtor.estado,
+        produtor.areaTotalHectares,
+        produtor.areaAgricultavel,
+        produtor.areaDeVegetacao,
+        produtor.culturasPlantadas as Cultura[] // se precisar forçar
+      )
+    );
+  }
+  
   
 }
 
