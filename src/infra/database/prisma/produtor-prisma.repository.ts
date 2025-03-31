@@ -63,6 +63,21 @@ class ProdutorPrismaRepository implements ProdutorRepository {
       data: dataAtualizada,
     });
   }
+
+  async delete(cpfOuCnpj: string): Promise<void> {
+    const produtor = await this.prismaService.produtor.findFirst({
+      where: { cpfOuCnpj },
+    });
+  
+    if (!produtor) {
+      throw new HttpException('Produtor não encontrado', HttpStatus.NOT_FOUND);
+    }
+  
+    await this.prismaService.produtor.delete({
+      where: { id: produtor.id },
+    });
+  }
+  
 }
 
 export { ProdutorPrismaRepository };

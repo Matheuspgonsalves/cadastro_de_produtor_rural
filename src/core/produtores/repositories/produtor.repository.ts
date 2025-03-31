@@ -6,4 +6,5 @@ export const PRODUTOR_REPOSITORY = 'PRODUTOR_REPOSITORY';
 export interface ProdutorRepository {
     save (produtor: Produtor): Promise<void>;
     update(cpfOuCnpj: string, produtor: AtualizarProdutorDTO): Promise<void>;
+    delete(cpfOuCnpj: string): Promise<void>;
 }
