@@ -1,6 +1,16 @@
-version: '3.8'
-
 services:
+  backend:
+    container_name: desafio_backend
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    environment:
+      - DATABASE_URL=postgresql://postgres:admin@postgres:5432/desafio_tecnico
+    depends_on:
+      - postgres
+
   postgres:
     image: postgres:15
     container_name: desafio_postgres
@@ -10,20 +20,9 @@ services:
       POSTGRES_PASSWORD: admin
       POSTGRES_DB: desafio_tecnico
     ports:
-      - '5432:5432'
+      - "5432:5432"
     volumes:
       - pgdata:/var/lib/postgresql/data
-
-  backend:
-    build: .
-    container_name: desafio_backend
-    restart: always
-    depends_on:
-      - postgres
-    environment:
-      DATABASE_URL: "postgresql://postgres:admin@postgres:5432/desafio_tecnico"
-    ports:
-      - '3000:3000'
 
 volumes:
   pgdata:
