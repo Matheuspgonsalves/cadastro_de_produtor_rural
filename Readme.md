@@ -1,4 +1,4 @@
-# Desafio Técnico — Cadastro de Produtor Rural
+# Cadastro de Produtor Rural
 
 Este desafio tem como objetivo implementar uma API RESTful para o cadastro de produtores rurais, com funcionalidades de CRUD e geração de indicadores.
 
